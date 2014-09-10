@@ -1,0 +1,11 @@
+'option'	vimgym.txt	/*'option'*
+'vimgym-option1'	vimgym.txt	/*'vimgym-option1'*
+'vimgym-option2'	vimgym.txt	/*'vimgym-option2'*
+:ExCommand	vimgym.txt	/*:ExCommand*
+awesome-topic	vimgym.txt	/*awesome-topic*
+i_CTRL-X_CTRL-K	vimgym.txt	/*i_CTRL-X_CTRL-K*
+vimgym	vimgym.txt	/*vimgym*
+vimgym-configuration	vimgym.txt	/*vimgym-configuration*
+vimgym-intro	vimgym.txt	/*vimgym-intro*
+vimgym-other	vimgym.txt	/*vimgym-other*
+vimgym.txt	vimgym.txt	/*vimgym.txt*
