@@ -39,11 +39,11 @@ let g:jellybeans_overrides = {
 \              'ctermfg': 'Green', 'ctermbg': '',
 \              'attr': '' },
 \}
-colorscheme jellybeans
 "colorscheme hybrid
 
 " set gui size and font
 if has("gui_running")
+  colorscheme jellybeans   " only load this color scheme in gui 
   set columns=136
   set lines=35
   if has("gui_gtk2")    " or has('unix')
