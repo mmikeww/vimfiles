@@ -306,7 +306,7 @@ nnoremap <F5> :!start cmd.exe /c "%:p"<CR>
 " from mswin.vim, Use CTRL-S for saving, also in Insert mode
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <C-O>:update<CR>
+inoremap <C-S> <ESC>:update<CR>
 
 " when using > to indent in visual mode, re-select the previously selected area
 " this allows multiple >>>> indents back to back
