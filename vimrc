@@ -18,7 +18,7 @@ set background=dark
 "colorscheme zenburn
 "colorscheme lucius
 " my jellybeans mods for lower contrast
-let g:jellybeans_background_color="272727"
+let g:jellybeans_background_color="1f1f1f"
 let g:jellybeans_overrides = {
 \    'Statement': { 'guifg': '8DA8FF', 'guibg': '',
 \              'ctermfg': 'DarkBlue', 'ctermbg': '',
@@ -51,6 +51,8 @@ if has("gui_running")
   elseif has("gui_win32")
     set guifont=Consolas:h11
   endif
+elseif has("unix")
+  colorscheme jellybeans
 endif
 
 
@@ -148,8 +150,14 @@ set smartcase
 
 " move backup and swap files to a different directory to not clutter working dirs
 set backup
-set backupdir=~/vimfiles/backup
-set directory=~/vimfiles/swap//
+if has("unix")
+   set backupdir=~/.vim/backup
+   set directory=~/.vim/swap//
+else
+   set backupdir=~/vimfiles/backup
+   set directory=~/vimfiles/swap//
+endif
+
 " from :help 'directory'
 "- For Unix and Win32, if a directory ends in two path separators "//"
 "  or "\\", the swap file name will be built from the complete path to
@@ -303,7 +311,9 @@ nnoremap Q <nop>
 "nnoremap <F5> :!%:p<CR>
 nnoremap <F5> :!start cmd.exe /c "%:p"<CR>
 
-" from mswin.vim, Use CTRL-S for saving, also in Insert mode
+" Use CTRL-S for saving, also in Insert mode
+" on Linux terminal, CTRL+S hangs the terminal, so a bash setting is required:
+" http://unix.stackexchange.com/questions/72086/ctrl-s-hang-terminal-emulator
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <ESC>:update<CR>
@@ -324,6 +334,7 @@ vnoremap > >gv
 " or use    nnoremap <leader>d "_d
 "vnoremap p "_dP
 " ^seems yankstack handles this
+" really i should just use visual mode to paste over
 
 
 " from vimrc_example.vim, see also :help :DiffOrig
