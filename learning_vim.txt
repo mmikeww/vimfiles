@@ -359,3 +359,11 @@ surround plugin practice
 ysiw"
 ys$"
 
+
+
+folding
+zo - open fold 
+zR - open all
+zc - close fold
+zM - close all
+za - toggle fold

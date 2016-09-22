@@ -221,7 +221,9 @@ set ttyfast
 set laststatus=2
 
 " set folding method
-"set foldmethod=indent
+set foldmethod=indent
+" disable folding by default
+set nofoldenable
 
 " convert using \ for directory nav to / so windows behaves like unix
 " but this messes up some plugins? and vim seems to allow / for windows dirs
