@@ -29,8 +29,8 @@ syn match   autohotkeyComment
 syn region  autohotkeyComment
       \ contains=@autohotkeyCommentGroup
       \ matchgroup=autohotkeyCommentStart
-      \ start='/\*'
-      \ end='\*/'
+      \ start='\s*/\*'
+      \ end='\s*\*/'
 
 syn match   autohotkeyEscape
       \ display
@@ -106,25 +106,29 @@ syn match autohotkeyVariable "%\S\{-}%"
 
 syn keyword autohotkeyBuiltinVariable
       \ A_Space A_Tab
-      \ A_WorkingDir A_ScriptDir A_ScriptName A_ScriptFullPath A_LineNumber
-      \ A_LineFile A_AhkVersion A_AhkPAth A_IsCompiled A_ExitReason
+      \ A_WorkingDir A_ScriptDir A_ScriptName A_ScriptFullPath A_ScriptHwnd A_LineNumber
+      \ A_LineFile A_ThisFunc A_ThisLabel A_AhkVersion A_AhkPath A_IsCompiled A_ExitReason
       \ A_YYYY A_MM A_DD A_MMMM A_MMM A_DDDD A_DDD A_WDay A_YWeek A_Hour A_Min
       \ A_Sec A_MSec A_Now A_NowUTC A_TickCount
-      \ A_IsSuspended A_BatchLines A_TitleMatchMode A_TitleMatchModeSpeed
-      \ A_DetectHiddenWindows A_DetectHiddenText A_AutoTrim A_STringCaseSense
-      \ A_FormatInteger A_FormatFloat A_KeyDelay A_WinDelay A_ControlDelay
-      \ A_MouseDelay A_DefaultMouseSpeed A_IconHidden A_IconTip A_IconFile
+      \ A_IsSuspended A_IsPaused A_IsCritical A_BatchLines A_TitleMatchMode A_TitleMatchModeSpeed
+      \ A_DetectHiddenWindows A_DetectHiddenText A_AutoTrim A_StringCaseSense
+      \ A_FileEncoding A_FormatInteger A_FormatFloat A_KeyDelay A_WinDelay A_ControlDelay
+      \ A_SendMode A_SendLevel A_StoreCapsLockMode A_KeyDelay A_KeyDelayDuration
+      \ A_KeyDelayPlay A_KeyDelayPlayDuration A_MouseDelayPlay
+      \ A_MouseDelay A_DefaultMouseSpeed A_RegView A_IconHidden A_IconTip A_IconFile
+      \ A_CoordModeToolTip A_CoordModePixel A_CoordModeMouse A_CoordModeCaret A_CoordModeMenu
       \ A_IconNumber
-      \ A_TimeIdle A_TimeIdlePhysical
+      \ A_TimeIdle A_TimeIdlePhysical A_DefaultGui A_DefaultListView A_DefaultTreeView
       \ A_Gui A_GuiControl A_GuiWidth A_GuiHeight A_GuiX A_GuiY A_GuiEvent
       \ A_GuiControlEvent A_EventInfo
       \ A_ThisMenuItem A_ThisMenu A_ThisMenuItemPos A_ThisHotkey A_PriorHotkey
-      \ A_TimeSinceThisHotkey A_TimeSincePriorHotkey A_EndChar
+      \ A_PriorKey A_TimeSinceThisHotkey A_TimeSincePriorHotkey A_EndChar
       \ ComSpec A_Temp A_OSType A_OSVersion A_Language A_ComputerName A_UserName
+      \ A_Is64BitOS A_PtrSize
       \ A_WinDir A_ProgramFiles ProgramFiles A_AppData A_AppDataCommon A_Desktop
       \ A_DesktopCommon A_StartMenu A_StartMenuCommon A_Programs
       \ A_ProgramsCommon A_Startup A_StartupCommon A_MyDocuments A_IsAdmin
-      \ A_ScreenWidth A_ScreenHeight A_IPAddress1 A_IPAddress2 A_IPAddress3
+      \ A_ScreenWidth A_ScreenHeight A_ScreenDPI A_IPAddress1 A_IPAddress2 A_IPAddress3
       \ A_IPAddress4
       \ A_Cursor A_CaretX A_CaretY Clipboard ClipboardAll ErrorLevel A_LastError
       \ A_Index A_LoopFileName A_LoopRegName A_LoopReadLine A_LoopField

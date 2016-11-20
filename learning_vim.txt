@@ -167,6 +167,9 @@ but is that omni complete?
 http://usevim.com/2012/07/06/vim101-completion/
 http://robots.thoughtbot.com/vim-you-complete-me
 
+complete line:
+ctrl+x, ctrl+L
+
 
 using marks for quick saving of position
 ma         set a mark
