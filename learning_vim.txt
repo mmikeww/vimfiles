@@ -370,3 +370,10 @@ zR - open all
 zc - close fold
 zM - close all
 za - toggle fold
+
+
+
+force very magic regexes by preceeding pattern with \v
+/\vHello \w+
+
+/<ctrl+r/    - press ctrl+r then / to use last pattern
