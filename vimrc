@@ -222,8 +222,11 @@ set laststatus=2
 
 " set folding method
 set foldmethod=indent
-" disable folding by default
-set nofoldenable
+" open all folds by default
+"   dont use nofoldenable:
+"     http://superuser.com/questions/169973/vim-enable-folds-but-dont-automatically-close-them#comment343818_171716
+"   instead use autocmd zR
+autocmd BufWinEnter * normal zR
 
 " convert using \ for directory nav to / so windows behaves like unix
 " but this messes up some plugins? and vim seems to allow / for windows dirs
