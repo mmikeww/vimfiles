@@ -5,8 +5,8 @@ my vim configuration
 # Installation
 
 ## Windows
-clone this repo into $HOME directory (usually `C:\Users\USERNAME\`)
+clone this repo into $HOME directory (into `C:\Users\USERNAME\vimfiles\`)
 
 ## Linux
 clone this repo into $HOME directory  
-then`mv vimfiles .vim` to rename folder because vim checks for VIMRC in different directory
+then`mv vimfiles .vim` to rename folder because of different runtimepath on unix (`:help rtp`)
