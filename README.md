@@ -5,7 +5,7 @@ my vim configuration
 # Installation
 
 ## Windows
-clone this repo into $HOME directory
+clone this repo into $HOME directory (usually `C:\Users\USERNAME\`)
 
 ## Linux
 clone this repo into $HOME directory  
