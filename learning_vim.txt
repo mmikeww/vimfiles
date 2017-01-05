@@ -379,3 +379,15 @@ force very magic regexes by preceeding pattern with \v
 /\vHello \w+
 
 /<ctrl+r/    - press ctrl+r then / to use last pattern
+
+
+
+
+
+http://stackoverflow.com/questions/4781070/how-to-insert-tab-character-when-expandtab-option-is-on-in-vim
+for files that use tabs instead of spaces for indents (yuck)
+i can insert a literal tab with this
+<Ctrl+V><tab>
+
+
+

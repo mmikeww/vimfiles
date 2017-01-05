@@ -316,7 +316,8 @@ nnoremap Q <nop>
 
 " execute current file in buffer
 " http://vim.wikia.com/wiki/Execute_external_programs_asynchronously_under_Windows
-"nnoremap <F5> :!%:p<CR>
+"nnoremap <F5> :!"%:p"<CR><CR>
+" windows version which doesn't block the editor:
 nnoremap <F5> :!start cmd.exe /c "%:p"<CR>
 
 " Use CTRL-S for saving, also in Insert mode

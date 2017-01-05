@@ -164,7 +164,7 @@ syn keyword autohotkeyCommand
       \ SoundSetWaveVolume
       \ FormatTime IfInString IfNotInString Sort StringCaseSense StringGetPos
       \ StringLeft StringRight StringLower StringUpper StringMid StringReplace
-      \ StringSplit StringTrimLeft StringTrimRight
+      \ StringSplit StringTrimLeft StringTrimRight StringLen
       \ Control ControlClick ControlFocus ControlGet ControlGetFocus
       \ ControlGetPos ControlGetText ControlMove ControlSend ControlSendRaw
       \ ControlSetText Menu PostMessage SendMessage SetControlDelay
