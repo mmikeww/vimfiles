@@ -144,6 +144,8 @@ When daw is used and the cursor is in the middle of a word, it affects the whole
 
 
 
+sentence and paragraph text objects: is, ip
+
 
 
 
@@ -229,6 +231,7 @@ and i think he will use visual mode to select and then 'x' command to 'cut'
 8. ReplaceWithRegister plugin - LOOK INTO THIS
 9. set up a freenode acct and ask in IRC #vim
 10. easy clip plugin   https://github.com/svermeulen/vim-easyclip
+11. vim-exhange plugin:  https://github.com/tommcdo/vim-exchange
 
 so i think i will use vi"p with yankstack, and fallback on ci"<c-r>0 if i need to do it repeatedly 
 so that i can use the . dot command.
