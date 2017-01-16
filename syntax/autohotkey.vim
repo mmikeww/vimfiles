@@ -16,22 +16,6 @@ syn keyword autohotkeyTodo
       \ contained
       \ TODO FIXME XXX NOTE
 
-syn cluster autohotkeyCommentGroup
-      \ contains=
-      \   autohotkeyTodo,
-      \   @Spell
-
-syn match   autohotkeyComment
-      \ display
-      \ contains=@autohotkeyCommentGroup
-      \ '`\@<!;.*$'
-
-syn region  autohotkeyComment
-      \ contains=@autohotkeyCommentGroup
-      \ matchgroup=autohotkeyCommentStart
-      \ start='\s*/\*'
-      \ end='\s*\*/'
-
 syn match   autohotkeyEscape
       \ display
       \ '`.'
@@ -86,6 +70,26 @@ syn region autohotkeyString
       \ start=+"+
       \ end=+"+
       \ contains=autohotkeyEscape
+
+" make sure these comments are defined AFTER the hotkey/hotstring matches
+" above, because the later definitions take precendence over the earlier ones
+" and before, if you tried to comment out a hotkey with     ; F1::F2
+" it would still show the hotkey highlighting instead of the comment one
+syn cluster autohotkeyCommentGroup
+      \ contains=
+      \   autohotkeyTodo,
+      \   @Spell
+
+syn match   autohotkeyComment
+      \ display
+      \ contains=@autohotkeyCommentGroup
+      \ '`\@<!;.*$'
+
+syn region  autohotkeyComment
+      \ contains=@autohotkeyCommentGroup
+      \ matchgroup=autohotkeyCommentStart
+      \ start='\s*/\*'
+      \ end='\s*\*/'
 
 " this is to highlight variables to be deref'd. we use \S instead of . to
 " match any non white space. this means it will match:

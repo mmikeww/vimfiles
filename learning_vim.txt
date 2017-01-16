@@ -291,10 +291,14 @@ while within a block, these will take you to the matching brace
 
 
 append text at the end of a word
-ea
+ea / Ea
 or start of the word
-bi
+bi / Bi
 these will allow me to surround a word without using surround plugin
+to surround with quotes, i'd need to do:
+bi"<ESC>ea"
+or while insert mode, instead of ESCing out, can use <C-O>
+bi"<C-O>f<space>"
 
 
 use KATAS to practice
@@ -306,6 +310,8 @@ so, can navigate to start / end of lines with:
 <C-O>^ or <C-O>I
 <C-O>$ or <C-O>A
 but i guess its just as easy to press <C-[>A
+this page suggests insert mode mappings:
+http://vim.wikia.com/wiki/Quick_command_in_insert_mode
 
 
 
@@ -315,12 +321,6 @@ words_in_parens
 need to practice search and replace
 
 
-remove 2nd function param with dt)
-so:
-function(one, two)
-becomes
-function(one)
-
 
 
 " https://github.com/Valloric/dotfiles/blob/master/vim/vimrc.vim
@@ -329,6 +329,24 @@ function(one)
 " info)
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
+
+
+
+
+
+
+using f,F,t,T in conjuction with operations
+dt,
+ct,
+f,a
+
+
+
+remove 2nd function param with dt)
+so:
+function(one, two)
+becomes
+function(one)
 
 
 

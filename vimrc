@@ -290,6 +290,9 @@ inoremap <down> <C-o>gj
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
 
+" remap CTRL+E to move to end of line
+inoremap <C-E> <End>
+
 
 " Make Y behave like C and D
 " by default Y would normally act the same as yy
