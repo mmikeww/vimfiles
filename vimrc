@@ -8,7 +8,7 @@ call pathogen#helptags()
 " load filetype plugins and indentation
 filetype plugin indent on
 
-" turn on syntax highlighting
+" turn on syntax highlighting after enabling ftplugins
 syntax enable
 
 set background=dark
