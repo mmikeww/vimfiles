@@ -88,8 +88,8 @@ syn match   autohotkeyComment
 syn region  autohotkeyComment
       \ contains=@autohotkeyCommentGroup
       \ matchgroup=autohotkeyCommentStart
-      \ start='\s*/\*'
-      \ end='\s*\*/'
+      \ start='^\s*/\*'
+      \ end='^\s*\*/'
 
 " this is to highlight variables to be deref'd. we use \S instead of . to
 " match any non white space. this means it will match:
