@@ -16,9 +16,46 @@ syn keyword autohotkeyTodo
       \ contained
       \ TODO FIXME XXX NOTE
 
+" only these chars are valid as escape sequences:   ,%`;nrbtvaf
+" https://autohotkey.com/docs/commands/_EscapeChar.htm
 syn match   autohotkeyEscape
       \ display
-      \ '`.'
+      \ '`[,%`;nrbtvaf]'
+
+" make sure these #PreProcessedDirectives are BEFORE the hotkey :: defs
+" otherwise a hotkey such as:     #v::MsgBox, hello world
+" gets highlighted as a directive instead of a hotkey
+syn match   autohotkeyPreProcStart
+      \ nextgroup=
+      \   autohotkeyInclude,
+      \   autohotkeyPreProc
+      \ skipwhite
+      \ display
+      \ '^\s*\zs#'
+
+syn keyword autohotkeyInclude
+      \ contained
+      \ Include
+      \ IncludeAgain
+
+syn keyword autohotkeyPreProc
+      \ contained
+      \ HotkeyInterval HotKeyModifierTimeout
+      \ Hotstring
+      \ IfWinActive IfWinNotActive IfWinExist IfWinNotExist
+      \ MaxHotkeysPerInterval MaxThreads MaxThreadsBuffer MaxThreadsPerHotkey
+      \ UseHook InstallKeybdHook InstallMouseHook
+      \ KeyHistory
+      \ NoTrayIcon SingleInstance
+      \ WinActivateForce
+      \ AllowSameLineComments
+      \ ClipboardTimeout
+      \ CommentFlag
+      \ ErrorStdOut
+      \ EscapeChar
+      \ MaxMem
+      \ NoEnv
+      \ Persistent
 
 syn match   autohotkeyHotkey
       \ contains=autohotkeyKey,
@@ -36,11 +73,15 @@ syn match   autohotkeyDelimiter
       \ display
       \ '::'
 
+" allowable hotstring options:
+" https://autohotkey.com/docs/Hotstrings.htm
 syn match   autohotkeyHotstringDefinition
       \ contains=autohotkeyHotstring,
       \   autohotkeyHotstringDelimiter
       \ display
-      \ '^:\%(B0\|C1\|K\d\+\|P\d\+\|S[IPE]\|Z\d\=\|[*?COR]\)*:.\{-}::'
+      \ '^\s*:\%([*?]\|[BORZ]0\?\|C[01]\?\|K\d\+\|P\d\+\|S[IPE]\)*:.\{-}::'
+"      \ '^:\%([*?]\|B0\?\|C[01]\?\|K\d\+\|O0\?\|P\d\+\|R0\?\|S[IPE]\|Z0\?\)*:.\{-}::'
+"      \ '^:\%(B0\|C1\|K\d\+\|P\d\+\|S[IPE]\|Z\d\=\|[*?COR]\)*:.\{-}::'
 
 syn match   autohotkeyHotstring
       \ contained
@@ -52,16 +93,21 @@ syn match   autohotkeyHotstringDelimiter
       \ display
       \ '::'
 
+" hotstrings can have multiple options
+" this is valid:      :B0C1SE::btw::by the way
 syn match   autohotkeyHotstringDelimiter
       \ contains=autohotkeyHotstringOptions
       \ contained
       \ display
-      \ ':\%(B0\|C1\|K\d\+\|P\d\+\|S[IPE]\|Z\d\=\|[*?COR]\):'
-
+      \ ':\%([*?]\|[BORZ]0\?\|C[01]\?\|K\d\+\|P\d\+\|S[IPE]\)*:'
+"      \ ':\%(B0\|C1\|K\d\+\|P\d\+\|S[IPE]\|Z\d\=\|[*?COR]\):'
+"      \ ':.\{-}:'
+"
 syn match   autohotkeyHotstringOptions
       \ contained
       \ display
-      \ '\%(B0\|C1\|K\d\+\|P\d\+\|S[IPE]\|Z\d\=\|[*?COR]\)'
+      \ '\%([*?]\|[BORZ]0\?\|C[01]\?\|K\d\+\|P\d\+\|S[IPE]\)*'
+"      \ '\%(B0\|C1\|K\d\+\|P\d\+\|S[IPE]\|Z\d\=\|[*?COR]\)'
 
 syn region autohotkeyString
       \ display
@@ -70,26 +116,6 @@ syn region autohotkeyString
       \ start=+"+
       \ end=+"+
       \ contains=autohotkeyEscape
-
-" make sure these comments are defined AFTER the hotkey/hotstring matches
-" above, because the later definitions take precendence over the earlier ones
-" and before, if you tried to comment out a hotkey with     ; F1::F2
-" it would still show the hotkey highlighting instead of the comment one
-syn cluster autohotkeyCommentGroup
-      \ contains=
-      \   autohotkeyTodo,
-      \   @Spell
-
-syn match   autohotkeyComment
-      \ display
-      \ contains=@autohotkeyCommentGroup
-      \ '`\@<!;.*$'
-
-syn region  autohotkeyComment
-      \ contains=@autohotkeyCommentGroup
-      \ matchgroup=autohotkeyCommentStart
-      \ start='^\s*/\*'
-      \ end='^\s*\*/'
 
 " this is to highlight variables to be deref'd. we use \S instead of . to
 " match any non white space. this means it will match:
@@ -194,39 +220,7 @@ syn keyword autohotkeyRepeat
       \ Loop
 
 syn keyword autohotkeyConditional
-      \ IfExist IfNotExist If IfEqual IfLess IfGreater Else in while
-
-syn match   autohotkeyPreProcStart
-      \ nextgroup=
-      \   autohotkeyInclude,
-      \   autohotkeyPreProc
-      \ skipwhite
-      \ display
-      \ '^\s*\zs#'
-
-syn keyword autohotkeyInclude
-      \ contained
-      \ Include
-      \ IncludeAgain
-
-syn keyword autohotkeyPreProc
-      \ contained
-      \ HotkeyInterval HotKeyModifierTimeout
-      \ Hotstring
-      \ IfWinActive IfWinNotActive IfWinExist IfWinNotExist
-      \ MaxHotkeysPerInterval MaxThreads MaxThreadsBuffer MaxThreadsPerHotkey
-      \ UseHook InstallKeybdHook InstallMouseHook
-      \ KeyHistory
-      \ NoTrayIcon SingleInstance
-      \ WinActivateForce
-      \ AllowSameLineComments
-      \ ClipboardTimeout
-      \ CommentFlag
-      \ ErrorStdOut
-      \ EscapeChar
-      \ MaxMem
-      \ NoEnv
-      \ Persistent
+      \ IfExist IfNotExist If IfEqual IfLess IfGreater Else until for in while
 
 syn keyword autohotkeyMatchClass
       \ ahk_group ahk_class ahk_id ahk_pid
@@ -257,10 +251,34 @@ syn match   autohotkeyFloat
 syn keyword autohotkeyType
       \ local
       \ global
+      \ static
+      \ byref
 
 syn keyword autohotkeyBoolean
       \ true
       \ false
+
+" make sure these comments are defined AFTER the hotkey/hotstring matches
+" above, because the later definitions take precendence over the earlier ones
+" and before, if you tried to comment out a hotkey with     ; F1::F2
+" it would still show the hotkey highlighting instead of the comment one
+syn cluster autohotkeyCommentGroup
+      \ contains=
+      \   autohotkeyTodo,
+      \   @Spell
+
+" match a ; at the start of line, or mid line after at least one whitespace
+syn match   autohotkeyComment
+      \ display
+      \ contains=@autohotkeyCommentGroup
+      \ '\%(^;\|\s\+;\).*$'
+"      \ '`\@<!;.*$'
+
+syn region  autohotkeyComment
+      \ contains=@autohotkeyCommentGroup
+      \ matchgroup=autohotkeyCommentStart
+      \ start='^\s*/\*'
+      \ end='^\s*\*/'
 
 " TODO: Shouldn't we look for g:, b:,  variables before defaulting to
 " something?
