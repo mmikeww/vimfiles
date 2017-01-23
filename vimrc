@@ -13,10 +13,23 @@ syntax enable
 
 set background=dark
 
+
+" in mintty (git bash for windows) only one cursor type was being displayed
+" these fix it
+" https://github.com/mintty/mintty/wiki/Tips#mode-dependent-cursor-in-vim
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
+
+" in terminal vim, pressing Esc was taking forever to exit insert mode
+" and go back to normal mode. this fixes it
+set ttimeout
+set ttimeoutlen=50
+
+
 " color scheme
-"let g:zenburn_old_Visual=1
-"colorscheme zenburn
-"colorscheme lucius
+
 " my jellybeans mods for lower contrast
 let g:jellybeans_background_color="1f1f1f"
 let g:jellybeans_overrides = {
@@ -39,11 +52,10 @@ let g:jellybeans_overrides = {
 \              'ctermfg': 'Green', 'ctermbg': '',
 \              'attr': '' },
 \}
-"colorscheme hybrid
 
 " set gui size and font
 if has("gui_running")
-  colorscheme jellybeans   " only load this color scheme in gui 
+  colorscheme jellybeans
   set columns=136
   set lines=35
   if has("gui_gtk2")    " or has('unix')

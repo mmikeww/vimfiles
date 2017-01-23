@@ -6,7 +6,10 @@ my vim configuration
 
 ## Windows
 clone this repo into $HOME directory (into `C:\Users\USERNAME\vimfiles\`)
+then from admin cmd prompt:  
+`mklink /D .vim vimfiles`  
+to create a symbolic link. this is necessary because git for windows mintty shell ships its own version of vim which looks in the unix locations
 
 ## Linux
 clone this repo into $HOME directory  
-then`mv vimfiles .vim` to rename folder because of different runtimepath on unix (`:help rtp`)
+then `mv vimfiles .vim` to rename folder because of different runtimepath on unix (`:help rtp`)
