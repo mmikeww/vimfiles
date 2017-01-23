@@ -127,6 +127,14 @@ set guioptions-=m
 " highlight the line that the cursor is on
 set cursorline
 
+" Only show cursorline in the current window
+" and not in insert mode
+augroup cline
+    autocmd!
+    autocmd WinLeave,InsertEnter * set nocursorline
+    autocmd WinEnter,InsertLeave * set cursorline
+augroup END
+
 " blink screen on error instead of beeping
 set visualbell
 
