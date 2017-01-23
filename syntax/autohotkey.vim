@@ -1,7 +1,8 @@
 " Vim syntax file
 " Language:         AutoHotkey script file
-" Maintainer:       Nikolai Weibull <now@bitwi.se>
-" Latest Revision:  2008-06-22
+" Maintainer:       SungHyun Nam <goweol@gmail.com>
+" Previous Maintainer:       Nikolai Weibull <now@bitwi.se>
+" Latest Revision:  2015-10-29
 
 if exists("b:current_syntax")
   finish
@@ -22,93 +23,6 @@ syn match   autohotkeyEscape
       \ display
       \ '`[,%`;nrbtvaf]'
 
-" make sure these #PreProcessedDirectives are BEFORE the hotkey :: defs
-" otherwise a hotkey such as:     #v::MsgBox, hello world
-" gets highlighted as a directive instead of a hotkey
-syn match   autohotkeyPreProcStart
-      \ nextgroup=
-      \   autohotkeyInclude,
-      \   autohotkeyPreProc
-      \ skipwhite
-      \ display
-      \ '^\s*\zs#'
-
-syn keyword autohotkeyInclude
-      \ contained
-      \ Include
-      \ IncludeAgain
-
-syn keyword autohotkeyPreProc
-      \ contained
-      \ HotkeyInterval HotKeyModifierTimeout
-      \ Hotstring
-      \ IfWinActive IfWinNotActive IfWinExist IfWinNotExist
-      \ MaxHotkeysPerInterval MaxThreads MaxThreadsBuffer MaxThreadsPerHotkey
-      \ UseHook InstallKeybdHook InstallMouseHook
-      \ KeyHistory
-      \ NoTrayIcon SingleInstance
-      \ WinActivateForce
-      \ AllowSameLineComments
-      \ ClipboardTimeout
-      \ CommentFlag
-      \ ErrorStdOut
-      \ EscapeChar
-      \ MaxMem
-      \ NoEnv
-      \ Persistent
-
-syn match   autohotkeyHotkey
-      \ contains=autohotkeyKey,
-      \   autohotkeyHotkeyDelimiter
-      \ display
-      \ '^.\{-}::'
-
-syn match   autohotkeyKey
-      \ contained
-      \ display
-      \ '^.\{-}'
-
-syn match   autohotkeyDelimiter
-      \ contained
-      \ display
-      \ '::'
-
-" allowable hotstring options:
-" https://autohotkey.com/docs/Hotstrings.htm
-syn match   autohotkeyHotstringDefinition
-      \ contains=autohotkeyHotstring,
-      \   autohotkeyHotstringDelimiter
-      \ display
-      \ '^\s*:\%([*?]\|[BORZ]0\?\|C[01]\?\|K\d\+\|P\d\+\|S[IPE]\)*:.\{-}::'
-"      \ '^:\%([*?]\|B0\?\|C[01]\?\|K\d\+\|O0\?\|P\d\+\|R0\?\|S[IPE]\|Z0\?\)*:.\{-}::'
-"      \ '^:\%(B0\|C1\|K\d\+\|P\d\+\|S[IPE]\|Z\d\=\|[*?COR]\)*:.\{-}::'
-
-syn match   autohotkeyHotstring
-      \ contained
-      \ display
-      \ '.\{-}'
-
-syn match   autohotkeyHotstringDelimiter
-      \ contained
-      \ display
-      \ '::'
-
-" hotstrings can have multiple options
-" this is valid:      :B0C1SE::btw::by the way
-syn match   autohotkeyHotstringDelimiter
-      \ contains=autohotkeyHotstringOptions
-      \ contained
-      \ display
-      \ ':\%([*?]\|[BORZ]0\?\|C[01]\?\|K\d\+\|P\d\+\|S[IPE]\)*:'
-"      \ ':\%(B0\|C1\|K\d\+\|P\d\+\|S[IPE]\|Z\d\=\|[*?COR]\):'
-"      \ ':.\{-}:'
-"
-syn match   autohotkeyHotstringOptions
-      \ contained
-      \ display
-      \ '\%([*?]\|[BORZ]0\?\|C[01]\?\|K\d\+\|P\d\+\|S[IPE]\)*'
-"      \ '\%(B0\|C1\|K\d\+\|P\d\+\|S[IPE]\|Z\d\=\|[*?COR]\)'
-
 syn region autohotkeyString
       \ display
       \ oneline
@@ -117,28 +31,19 @@ syn region autohotkeyString
       \ end=+"+
       \ contains=autohotkeyEscape
 
-" this is to highlight variables to be deref'd. we use \S instead of . to
-" match any non white space. this means it will match:
-" %var%
-" but not:
-" % var%
-" thats useful to prevent forced-expression parameters from being matched
-syn match autohotkeyVariable "%\S\{-}%"
-
-"syn region autohotkeyVariable
-"      \ display
-"      \ oneline
-"      \ contains=autohotkeyBuiltinVariable
-"      \ matchgroup=autohotkeyVariableDelimiter
-"      \ start="%"
-"      \ end="%"
-"      \ keepend
+syn match autohotkeyVariable
+      \ display
+      \ oneline
+      \ contains=autohotkeyBuiltinVariable
+      \ keepend
+      \ '%\S\{-}%'
 
 syn keyword autohotkeyBuiltinVariable
       \ A_Space A_Tab
       \ A_WorkingDir A_ScriptDir A_ScriptName A_ScriptFullPath A_ScriptHwnd A_LineNumber
-      \ A_LineFile A_ThisFunc A_ThisLabel A_AhkVersion A_AhkPath A_IsCompiled A_ExitReason
-      \ A_YYYY A_MM A_DD A_MMMM A_MMM A_DDDD A_DDD A_WDay A_YWeek A_Hour A_Min
+      \ A_LineFile A_ThisFunc A_ThisLabel A_AhkVersion A_AhkPath A_IsUnicode A_IsCompiled A_ExitReason
+      \ A_YYYY A_MM A_DD A_MMMM A_MMM A_DDDD A_DDD A_WDay A_YDay A_YWeek A_Hour A_Min
+      \ A_Mon A_Year A_MDay A_NumBatchLines
       \ A_Sec A_MSec A_Now A_NowUTC A_TickCount
       \ A_IsSuspended A_IsPaused A_IsCritical A_BatchLines A_TitleMatchMode A_TitleMatchModeSpeed
       \ A_DetectHiddenWindows A_DetectHiddenText A_AutoTrim A_StringCaseSense
@@ -162,6 +67,10 @@ syn keyword autohotkeyBuiltinVariable
       \ A_IPAddress4
       \ A_Cursor A_CaretX A_CaretY Clipboard ClipboardAll ErrorLevel A_LastError
       \ A_Index A_LoopFileName A_LoopRegName A_LoopReadLine A_LoopField
+      \ A_LoopFileExt A_LoopFileFullPath A_LoopFileLongPath A_LoopFileShortPath
+      \ A_LoopFileShortName A_LoopFileDir A_LoopFileTimeModified A_LoopFileTimeCreated
+      \ A_LoopFileTimeAccessed A_LoopFileAttrib A_LoopFileSize A_LoopFileSizeKB A_LoopFileSizeMB
+      \ A_LoopRegType A_LoopRegKey A_LoopRegSubKey A_LoopRegTimeModified
 
 syn match   autohotkeyBuiltinVariable
       \ contained
@@ -171,7 +80,7 @@ syn match   autohotkeyBuiltinVariable
 syn keyword autohotkeyCommand
       \ ClipWait EnvGet EnvSet EnvUpdate
       \ Drive DriveGet DriveSpaceFree FileAppend FileCopy FileCopyDir
-      \ FileCreateDir FileCreateShortcut FileDelete FileGetAttrib
+      \ FileCreateDir FileCreateShortcut FileDelete FileGetAttrib FileEncoding
       \ FileGetShortcut FileGetSize FileGetTime FileGetVersion FileInstall
       \ FileMove FileMoveDir FileReadLine FileRead FileRecycle FileRecycleEmpty
       \ FileRemoveDir FileSelectFolder FileSelectFile FileSetAttrib FileSetTime
@@ -205,12 +114,16 @@ syn keyword autohotkeyCommand
       \ WinGetText WinGetTitle WinHide WinKill WinMaximize WinMinimize
       \ WinMinimizeAll WinMinimizeAllUndo WinMove WinRestore WinSet
       \ WinSetTitle WinShow WinWait WinWaitActive WinWaitNotActive WinWaitClose
+      \ SetCapsLockState SetNumLockState SetScrollLockState
 
 syn keyword autohotkeyFunction
       \ InStr RegExMatch RegExReplace StrLen SubStr Asc Chr
       \ DllCall VarSetCapacity WinActive WinExist IsLabel OnMessage 
       \ Abs Ceil Exp Floor Log Ln Mod Round Sqrt Sin Cos Tan ASin ACos ATan
-      \ FileExist GetKeyState
+      \ FileExist GetKeyState NumGet NumPut StrGet StrPut RegisterCallback
+      \ IsFunc Trim LTrim RTrim IsObject Object Array FileOpen
+      \ ComObjActive ComObjArray ComObjConnect ComObjCreate ComObjGet
+      \ ComObjError ComObjFlags ComObjQuery ComObjType ComObjValue ComObject
 
 syn keyword autohotkeyStatement
       \ Break Continue Exit ExitApp Gosub Goto OnExit Pause Return
@@ -220,7 +133,47 @@ syn keyword autohotkeyRepeat
       \ Loop
 
 syn keyword autohotkeyConditional
-      \ IfExist IfNotExist If IfEqual IfLess IfGreater Else until for in while
+      \ IfExist IfNotExist If IfEqual IfLess IfGreater Else
+      \ IfWinExist IfWinNotExist IfWinActive IfWinNotActive
+      \ IfNotEqual IfLessOrEqual IfGreaterOrEqual
+      \ while until for in
+
+syn match   autohotkeyPreProcStart
+      \ nextgroup=
+      \   autohotkeyInclude,
+      \   autohotkeyPreProc
+      \ skipwhite
+      \ display
+      \ '^\s*\zs#'
+
+syn keyword autohotkeyInclude
+      \ contained
+      \ Include
+      \ IncludeAgain
+
+syn keyword autohotkeyPreProc
+      \ contained
+      \ HotkeyInterval HotKeyModifierTimeout
+      \ Hotstring
+      \ IfWinActive IfWinNotActive IfWinExist IfWinNotExist
+      \ If IfTimeout
+      \ MaxHotkeysPerInterval MaxThreads MaxThreadsBuffer MaxThreadsPerHotkey
+      \ UseHook InstallKeybdHook InstallMouseHook
+      \ KeyHistory
+      \ NoTrayIcon SingleInstance
+      \ WinActivateForce
+      \ AllowSameLineComments
+      \ ClipboardTimeout
+      \ CommentFlag
+      \ ErrorStdOut
+      \ EscapeChar
+      \ MaxMem
+      \ NoEnv
+      \ Persistent
+      \ LTrim
+      \ InputLevel
+      \ MenuMaskKey
+      \ Warn
 
 syn keyword autohotkeyMatchClass
       \ ahk_group ahk_class ahk_id ahk_pid
@@ -258,21 +211,60 @@ syn keyword autohotkeyBoolean
       \ true
       \ false
 
-" make sure these comments are defined AFTER the hotkey/hotstring matches
-" above, because the later definitions take precendence over the earlier ones
-" and before, if you tried to comment out a hotkey with     ; F1::F2
-" it would still show the hotkey highlighting instead of the comment one
+syn match   autohotkeyHotkey
+      \ contains=autohotkeyKey,
+      \   autohotkeyHotkeyDelimiter
+      \ display
+      \ '^.\{-}::'
+
+syn match   autohotkeyKey
+      \ contained
+      \ display
+      \ '^.\{-}'
+
+syn match   autohotkeyDelimiter
+      \ contained
+      \ display
+      \ '::'
+
+" allowable hotstring options:
+" https://autohotkey.com/docs/Hotstrings.htm
+syn match   autohotkeyHotstringDefinition
+      \ contains=autohotkeyHotstring,
+      \   autohotkeyHotstringDelimiter
+      \ display
+      \ '^\s*:\%([*?]\|[BORZ]0\?\|C[01]\?\|K\d\+\|P\d\+\|S[IPE]\)*:.\{-}::'
+
+syn match   autohotkeyHotstring
+      \ contained
+      \ display
+      \ '.\{-}'
+
+syn match   autohotkeyHotstringDelimiter
+      \ contained
+      \ display
+      \ '::'
+
+syn match   autohotkeyHotstringDelimiter
+      \ contains=autohotkeyHotstringOptions
+      \ contained
+      \ display
+      \ ':\%([*?]\|[BORZ]0\?\|C[01]\?\|K\d\+\|P\d\+\|S[IPE]\)*:'
+
+syn match   autohotkeyHotstringOptions
+      \ contained
+      \ display
+      \ '\%([*?]\|[BORZ]0\?\|C[01]\?\|K\d\+\|P\d\+\|S[IPE]\)*'
+
 syn cluster autohotkeyCommentGroup
       \ contains=
       \   autohotkeyTodo,
       \   @Spell
 
-" match a ; at the start of line, or mid line after at least one whitespace
 syn match   autohotkeyComment
       \ display
       \ contains=@autohotkeyCommentGroup
       \ '\%(^;\|\s\+;\).*$'
-"      \ '`\@<!;.*$'
 
 syn region  autohotkeyComment
       \ contains=@autohotkeyCommentGroup
