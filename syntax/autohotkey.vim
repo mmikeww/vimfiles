@@ -1,8 +1,10 @@
 " Vim syntax file
 " Language:         AutoHotkey script file
-" Maintainer:       SungHyun Nam <goweol@gmail.com>
-" Previous Maintainer:       Nikolai Weibull <now@bitwi.se>
-" Latest Revision:  2015-10-29
+" Maintainer:       Michael Wong
+"                   https://github.com/mmikeww/autohotkey.vim
+" Latest Revision:  2017-02-20
+" Previous Maintainers:       SungHyun Nam <goweol@gmail.com>
+"                             Nikolai Weibull <now@bitwi.se>
 
 if exists("b:current_syntax")
   finish
@@ -136,7 +138,7 @@ syn keyword autohotkeyConditional
       \ IfExist IfNotExist If IfEqual IfLess IfGreater Else
       \ IfWinExist IfWinNotExist IfWinActive IfWinNotActive
       \ IfNotEqual IfLessOrEqual IfGreaterOrEqual
-      \ while until for in
+      \ while until for in try catch finally
 
 syn match   autohotkeyPreProcStart
       \ nextgroup=
@@ -176,7 +178,7 @@ syn keyword autohotkeyPreProc
       \ Warn
 
 syn keyword autohotkeyMatchClass
-      \ ahk_group ahk_class ahk_id ahk_pid
+      \ ahk_group ahk_class ahk_id ahk_pid ahk_exe
 
 syn match   autohotkeyNumbers
       \ display

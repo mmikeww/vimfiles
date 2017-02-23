@@ -341,7 +341,7 @@ nnoremap Q <nop>
 " http://vim.wikia.com/wiki/Execute_external_programs_asynchronously_under_Windows
 "nnoremap <F5> :!"%:p"<CR><CR>
 " windows version which doesn't block the editor:
-nnoremap <F5> :!start cmd.exe /c "%:p"<CR>
+nnoremap <F5> :!start cmd.exe /c "%:p"<CR><CR>
 
 " Use CTRL-S for saving, also in Insert mode
 " on Linux terminal, CTRL+S hangs the terminal, so a bash setting is required:

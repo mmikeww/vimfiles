@@ -144,8 +144,11 @@ When daw is used and the cursor is in the middle of a word, it affects the whole
 
 
 
-sentence and paragraph text objects: is, ip
+sentence and paragraph text objects: 
 
+is, ip, ap
+vip, vap
+dip, dap
 
 
 
@@ -340,6 +343,13 @@ dt,
 ct,
 f,a
 
+same with /search motion
+d/return
+d/^}/e          " delete until the next } at start of line till the end of the search
+v/^}/e
+c/foo
+
+
 
 
 remove 2nd function param with dt)
@@ -410,5 +420,53 @@ for files that use tabs instead of spaces for indents (yuck)
 i can insert a literal tab with this
 <Ctrl+V><tab>
 
+
+
+
+filter all lines containing or not containing a pattern:
+http://vim.wikia.com/wiki/VimTip227
+
+:g/pattern/d
+:g!/pattern/d
+
+
+
+
+
+https://8thlight.com/blog/jerome-goodrich/2017/01/17/Vim-and-TDD.html
+
+:grep foo
+:cdo %s/foo/bar/g | update
+
+:grep foo will find all instances of foo in your project, and populate them in what is called the quickfix window. :cdo then takes a command to apply to each instance in that window. In our case, the command we want to apply is a global substitution of foo with bar, but it could be anything. After making changes, we want those changes to take effect, so we use | update. Voila! With two quick commands we've managed to rename every instance of a variable or function in our entire project.
+
+
+
+scrolling without moving cursor
+http://stackoverflow.com/questions/3458689/how-to-move-screen-without-moving-cursor-in-vim
+
+
+
+
+remove linebreaks
+http://theletterpsi.blogspot.com/2010/07/tips-for-editing-plain-text-with-vim_19.html
+
+:g/./,/^$/j
+
+
+
+
+command line window
+
+http://vimcasts.org/episodes/refining-search-patterns-with-the-command-line-window/
+
+
+
+
+tcomment plugin
+gcip - comment inner paragraph
+vipgc - same
+gciw - comment a word
+gcc  - comment line
 
 
