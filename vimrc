@@ -31,8 +31,9 @@ set ttimeoutlen=50
 " color scheme
 
 " my jellybeans mods for lower contrast
-let g:jellybeans_background_color="1f1f1f"
 let g:jellybeans_overrides = {
+\    'background': { 'guibg': '2c2c2c' },
+\    'Normal': { 'guifg': 'cccccc' },
 \    'Statement': { 'guifg': '8DA8FF', 'guibg': '',
 \              'ctermfg': 'DarkBlue', 'ctermbg': '',
 \              'attr': '' },
@@ -45,23 +46,27 @@ let g:jellybeans_overrides = {
 \    'ColorColumn': { 'guifg': '', 'guibg': '303030',
 \              'ctermfg': '', 'ctermbg': 'Black',
 \              'attr': '' },
-\    'CursorLineNr': { 'guifg': '8F8A89', 'guibg': g:jellybeans_background_color,
+\    'CursorLineNr': { 'guifg': '8F8A89', 'guibg': '2c2c2c',
 \              'ctermfg': 'Black', 'ctermbg': '',
 \              'attr': 'none' },
 \    'Special': { 'guifg': '8abeb7', 'guibg': '',
 \              'ctermfg': 'Green', 'ctermbg': '',
 \              'attr': '' },
+\    'LineNR': { 'guifg': '4d4848' },
 \}
 
 " set gui size and font
 if has("gui_running")
   colorscheme jellybeans
-  set columns=136
+  set columns=120
   set lines=35
   if has("gui_gtk2")    " or has('unix')
     set guifont=Inconsolata\ 12
   elseif has("gui_win32")
-    set guifont=Consolas:h11
+    set guifont=Inconsolata:h13
+    " set guifont=DejaVu\ Sans\ Mono:h12
+    " set guifont=Input:h11
+    " set guifont=Consolas:h11
   endif
 elseif has("unix")
   colorscheme jellybeans

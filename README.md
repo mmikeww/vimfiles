@@ -5,8 +5,8 @@ my vim configuration
 # Installation
 
 ## Windows
-clone this repo into $HOME directory (into `C:\Users\USERNAME\vimfiles\`)
-then from admin cmd prompt:  
+clone this repo into $HOME directory (into `C:\Users\USERNAME\vimfiles\`)  
+then from admin basic cmd prompt (not powershell):  
 `mklink /D .vim vimfiles`  
 to create a symbolic link. this is necessary because git for windows mintty shell ships its own version of vim which looks in the unix locations
 
