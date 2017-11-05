@@ -108,7 +108,12 @@ set wrap
 set linebreak
 
 " show char on wrapped lines
-" set showbreak=
+set breakindent
+set breakindentopt=sbr
+:let &showbreak = '> '
+
+" if wrapping is ever toggled off, scroll normally
+set sidescroll=1
 
 " show lines instead of @ symbols if they don't fit
 set display+=lastline
@@ -280,6 +285,9 @@ set wildmode=longest,full
 " allow omni-completion to use syntax file keywords for langs without omnifunc
 set omnifunc=syntaxcomplete#Complete
 
+" long lines cause vim to slowdown due to syntax highlighting
+set synmaxcol=200
+
 " allow % motion to jump to matching if/else branches as well
 " not using right now because i would need to define b:matchwords for AHK
 " see macros/matchit.txt for help
@@ -292,12 +300,12 @@ set omnifunc=syntaxcomplete#Complete
 call yankstack#setup()
 
 " move by visual lines on the screen (would normally jump over wrapped lines)
-" but this messes up movements such as 5j etc since it will move by 5 visual lines.
-" so then i cant rely on the relative linenumbers for using a count 
-" nnoremap j gj
-" nnoremap k gk
-" but do map the arrows to move by screen lines since I'm never using a count with arrows
-" fuck you vim purists
+" unless preceeded by a count, then use regular movement so we can use
+" the relativenumber setting
+" https://bluz71.github.io/2017/05/15/vim-tips-tricks.html
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
+" do map the arrows to move by screen lines since I'm never using a count with arrows
 nnoremap <up> gk
 nnoremap <down> gj
 inoremap <up> <C-o>gk
@@ -329,7 +337,7 @@ imap <C-BS> <C-w>
 " http://vim.wikia.com/wiki/Shifting_blocks_visually
 inoremap <S-Tab> <C-d>
 
-" turn off search highlighting with CTRL+L
+" also toggle search highlighting with CTRL+L
 nnoremap <C-L> <C-L>:set hlsearch! hlsearch?<CR>
 
 " Stop that damn ex mode, I don't know what it is and don't use it
