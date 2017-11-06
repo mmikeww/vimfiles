@@ -470,3 +470,10 @@ gciw - comment a word
 gcc  - comment line
 
 
+
+
+ctrlp plugin
+ctrl+J/K to navigate up down
+Ctrl+T open in new tab
+ctrl+V open in vertical split
+ctrl+X open in horizontal split
