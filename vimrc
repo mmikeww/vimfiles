@@ -63,10 +63,9 @@ if has("gui_running")
   if has("gui_gtk2")    " or has('unix')
     set guifont=Inconsolata\ 12
   elseif has("gui_win32")
-    set guifont=Inconsolata:h13
+    " set guifont=Inconsolata:h13
     " set guifont=DejaVu\ Sans\ Mono:h12
-    " set guifont=Input:h11
-    " set guifont=Consolas:h11
+    set guifont=Consolas:h11
   endif
 elseif has("unix")
   colorscheme jellybeans
@@ -113,9 +112,11 @@ set wrap
 set linebreak
 
 " show char on wrapped lines
-set breakindent
-set breakindentopt=sbr
-:let &showbreak = '> '
+if exists('+breakindent')
+   set breakindent
+   set breakindentopt=sbr
+   :let &showbreak = '> '
+endif
 
 " if wrapping is ever toggled off, scroll normally
 set sidescroll=1
@@ -315,6 +316,17 @@ nnoremap <up> gk
 nnoremap <down> gj
 inoremap <up> <C-o>gk
 inoremap <down> <C-o>gj
+
+
+" center the screen after 'finding next' occurence and open folds
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+
+" easier navigation to the start/end of lines
+noremap H ^
+noremap L $
+vnoremap L g_
 
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
